@@ -1,0 +1,14 @@
+{
+	"manifest_version": 2,
+
+	"name": "#ДАНСwithme",
+	"description": "#ДАНСwithme Това разширение показва когато отваряте сайт от медийната група на Пеевски.",
+	"version": "0.4.1",
+
+	"content_scripts": [ {
+		"all_frames": true,
+		"js": [ "init.js" ],
+		"matches": [ "http://*/*", "https://*/*" ],
+		"run_at": "document_start"
+	} ]
+}
