@@ -18,11 +18,11 @@
 
 1. Fork-нете репозиторията
 2. Клонирайте вашето копие в някоя папка на компютъра си
-3. Отворете [chrome://extensions/](chrome://extensions/)
+3. Отворете [chrome://extensions](chrome://extensions)
 4. Включете "Developer mode"
 5. Изберете "Load unpacked extension..." и посочете папката, в която сте клонирали репозиторията
 6. Направете вашите промени
-7. Презаредете таба с [chrome://extensions/](chrome://extensions/) (`Cmd` + `R` или `F5`) и промените ви ще бъдат засечени
+7. Презаредете таба с [chrome://extensions](chrome://extensions) (`Cmd` + `R` или `F5`) и промените ви ще бъдат засечени
 8. Следете за грешки в нормалната конзола на браузъра
 
 Документацията за [разработка на разширения за Google Chrome се намира тук](https://developer.chrome.com/extensions/getstarted.html).
