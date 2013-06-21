@@ -1,27 +1,5 @@
-function peevskiCreateCookie(name,value,minutes) {
-	if (minutes) {
-		var date = new Date();
-		date.setTime(date.getTime()+(minutes*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-
-function peevskiReadCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-
-function peevskiCheck() {
-	var peevski = false;
-	var peevski_arr = [
+function checkForPeevskiDomain() {
+	var blockedDomains = [
 		'monitor.bg',
 		'telegraph.bg',
 		'politika.bg',
@@ -57,21 +35,18 @@ function peevskiCheck() {
 	]
 	var patt = null;
 	var patt_txt = null;
-	for (var i = 0; i < peevski_arr.length; i++) {
-		patt_txt = "^http(s)?\:\/\/([^\/]*)?"+peevski_arr[i];
+	for (var i = 0; i < blockedDomains.length; i++) {
+		patt_txt = "^http(s)?\:\/\/([^\/]*)?"+blockedDomains[i];
 		patt = new RegExp(patt_txt);
 		if (patt.test(document.location.href)) {
-			peevski = true;
-			break;
+			return blockedDomains[i];
 		}
 	}
-	return peevski;
+	return false;
 };
 
-if (peevskiCheck() && peevskiReadCookie('force_continue04') != 'continue') {
-
-window.stop();
-document.documentElement.innerHTML = '\
+function showPeevskiDomainWarning() {
+	document.documentElement.innerHTML = '\
 <html>\
 	<header>\
 	<style>\
@@ -119,9 +94,27 @@ document.documentElement.innerHTML = '\
 <div style="display: none;">\
 <!--\
 ';
-document.getElementById('force_continue').onclick = function () {
-	peevskiCreateCookie('force_continue04', 'continue', 10);
-	location.reload();
+
+	document.getElementById('force_continue').onclick = function () {
+		var d = new Date();
+		var t = d.getTime();
+		global_result['continue_time_'+peevski] = t + 10 * 60 * 1000;
+		chrome.storage.local.set(global_result);
+		location.reload();
+	}
 }
 
+var peevski = checkForPeevskiDomain();
+var global_result = null;
+if (peevski != false) {
+	chrome.storage.local.get(function (result) {
+		global_result = result;
+		var d = new Date();
+		var t = d.getTime();
+		if (typeof result['continue_time_'+peevski] === "undefined" || t > global_result['continue_time_'+peevski]) {
+			window.stop();
+			showPeevskiDomainWarning();
+		}
+	});
 }
+
