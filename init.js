@@ -33,12 +33,10 @@ function checkForPeevskiDomain() {
 		'vsekiden.com',
 		'novinar.bg'
 	]
-	var patt = null;
-	var patt_txt = null;
+	var urlPattern;
 	for (var i = 0; i < blockedDomains.length; i++) {
-		patt_txt = "^http(s)?\:\/\/([^\/]*)?"+blockedDomains[i];
-		patt = new RegExp(patt_txt);
-		if (patt.test(document.location.href)) {
+		urlPattern = new RegExp("^http(s)?\:\/\/([^\/]*)?" + blockedDomains[i]);
+		if (urlPattern.test(document.location.href)) {
 			return blockedDomains[i];
 		}
 	}
@@ -110,22 +108,24 @@ function showPeevskiDomainWarning() {
 ';
 
 	document.getElementById('force_continue').onclick = function () {
-		var d = new Date();
-		var t = d.getTime();
-		global_result['continue_time_'+peevski] = t + 10 * 60 * 1000;
-		chrome.storage.local.set(global_result);
+		var date = new Date();
+		var time = date.getTime();
+		domainExceptions['continue_time_' + blockedDomain] = time + 10 * 60 * 1000;
+		chrome.storage.local.set(domainExceptions);
 		location.reload();
 	}
 }
 
-var peevski = checkForPeevskiDomain();
-var global_result = null;
-if (peevski != false) {
+var blockedDomain = checkForPeevskiDomain();
+var domainExceptions = {};
+
+if (blockedDomain !== false) {
 	chrome.storage.local.get(function (result) {
-		global_result = result;
-		var d = new Date();
-		var t = d.getTime();
-		if (typeof result['continue_time_'+peevski] === "undefined" || t > global_result['continue_time_'+peevski]) {
+		domainExceptions = result;
+		var date = new Date();
+		var time = date.getTime();
+		var domainKey = 'continue_time_' + blockedDomain;
+		if (result[domainKey] === undefined || time > domainExceptions[domainKey]) {
 			window.stop();
 			showPeevskiDomainWarning();
 		}
