@@ -6,7 +6,7 @@
 
 ## Инсталация
 
-TODO
+Инсталирайте приложението от [Chrome Web Store](https://chrome.google.com/webstore/detail/%D0%B4%D0%B0%D0%BD%D1%81withme/lmcpmmnecclemnhobkplkgpjjddgnkej?hl=bg&gl=001).
 
 ## Добавяне на нови домейни
 
