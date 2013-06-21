@@ -59,23 +59,28 @@ function showPeevskiDomainWarning() {
 			width: 80%;\
 			min-height: 12em;\
 			margin: 5% auto;\
-			text-align: center;\
 			background: #fff;\
 			border-radius: 10px;\
 			border: 1px solid #000;\
-			padding: 20px;\
+			padding: 4%;\
 			line-height: 140%;\
 			overflow: hidden;\
+		}\
+		.main h3 {\
+			margin-top: 0;\
 		}\
 		.logo {\
 			width: 20%;\
 			float: left;\
-			padding: 20px 40px 20px 20px;\
+			padding: 0 5% 5% 0;\
 		}\
 		.text {\
-			float: left;\
+			margin-left: 25%;\
 		}\
 		.text p {\
+			text-align: left;\
+		}\
+		.main ul {\
 			text-align: left;\
 		}\
 	</style>\
@@ -84,7 +89,14 @@ function showPeevskiDomainWarning() {
 		<div class="main">\
 			<img src="' + chrome.extension.getURL('ignore.jpg') + '" alt="" class="logo" />\
 			<div class="text">\
-				<p>Внимание! Сайтът, който искате да посетите, е част от медийната група на Делян Пеевски!</p>\
+				<h3>Внимание! Сайтът е част от групата на Делян Пеевски!</h3>\
+				<p>Материалът може да бъде:</p>\
+				<ul>\
+					<li>Необективен</li>\
+					<li>Съдържащ непроверени или неверни факти</li>\
+					<li>Без втора гледна точка</li>\
+					<li>Силно манипулативен</li>\
+				</ul>\
 				<p>Ако отворите страницата, подкрепяте некачествената журналистика.</p>\
 				<p>Импресия по импресия - медийна империя!</p>\
 				<p><br /><input class="ignore" type="button" value="&#65513; #ignore" onclick="window.history.back();" /> <input id="force_continue" class="continue" type="button" value="все пак ще продължа &#65515;" /><?p>\
