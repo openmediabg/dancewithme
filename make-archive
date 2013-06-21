@@ -1,3 +1,9 @@
 #!/bin/sh
 
-rm -rf dancewithme && mkdir dancewithme && { git ls-files|grep -v .gitignore|xargs -J % cp % dancewithme; } && zip -r dancewithme.zip dancewithme/ && rm -rf dancewithme
+extension_files="init.js manifest.json icon*png ignore.jpg"
+
+rm -rf dancewithme && \
+	mkdir dancewithme && \
+	cp $extension_files dancewithme && \
+	zip -r dancewithme.zip dancewithme/ && \
+	rm -rf dancewithme
