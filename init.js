@@ -120,7 +120,7 @@ var blockedDomain = checkForPeevskiDomain();
 var domainExceptions = {};
 
 if (blockedDomain !== false) {
-	chrome.storage.local.get(function (result) {
+	chrome.storage.local.get(null, function (result) {
 		domainExceptions = result;
 		var date = new Date();
 		var time = date.getTime();
