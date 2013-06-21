@@ -57,18 +57,20 @@ function showPeevskiDomainWarning() {
 		}\
 		.main {\
 			width: 80%;\
-			height: 12em;\
+			min-height: 12em;\
 			margin: 5% auto;\
 			text-align: center;\
 			background: #fff;\
 			border-radius: 10px;\
 			border: 1px solid #000;\
 			padding: 20px;\
+			line-height: 140%;\
+			overflow: hidden;\
 		}\
 		.logo {\
 			width: 20%;\
 			float: left;\
-			padding: 20px;\
+			padding: 20px 40px 20px 20px;\
 		}\
 		.text {\
 			float: left;\
@@ -80,7 +82,7 @@ function showPeevskiDomainWarning() {
 	</header>\
 	<body>\
 		<div class="main">\
-			<img src="http://24.media.tumblr.com/243dfc6696cf71013636c403ee1473f2/tumblr_mon26lM2W71swvzfoo1_r1_1280.jpg" alt="" class="logo" />\
+			<img src="' + chrome.extension.getURL('ignore.jpg') + '" alt="" class="logo" />\
 			<div class="text">\
 				<p>Внимание! Сайтът, който искате да посетите, е част от медийната група на Делян Пеевски!</p>\
 				<p>Ако отворите страницата, подкрепяте некачествената журналистика.</p>\

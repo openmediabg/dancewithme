@@ -10,6 +10,10 @@
 		"storage"
 	],
 
+	"web_accessible_resources": [
+		"ignore.jpg"
+	],
+
 	"content_scripts": [ {
 		"all_frames": true,
 		"js": [ "init.js" ],
