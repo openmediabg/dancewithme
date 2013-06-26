@@ -34,7 +34,8 @@ function checkForPeevskiDomain(url) {
 		'novinar.bg',
 		'radiovitosha.com',
 		'radioveselina.bg',
-		'magicfm.bg'
+		'magicfm.bg',
+		'thevoice.bg'
 	]
 	var urlPattern;
 	for (var i = 0; i < currentDomains.length; i++) {
