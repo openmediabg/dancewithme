@@ -45,4 +45,3 @@ PageMod({
   include: BAD_DOMAINS,
   contentScriptFile: data.url("warning.js")
 });
-
