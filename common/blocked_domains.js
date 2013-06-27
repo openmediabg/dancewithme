@@ -31,7 +31,11 @@ function checkForPeevskiDomain(url) {
 		'struma.bg',
 		'marica.bg',
 		'vsekiden.com',
-		'novinar.bg'
+		'novinar.bg',
+		'radiovitosha.com',
+		'radioveselina.bg',
+		'magicfm.bg',
+		'thevoice.bg'
 	];
 
 	var urlPattern;
