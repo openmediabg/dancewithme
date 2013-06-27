@@ -3,7 +3,7 @@
 
 	"name": "#ДАНСwithme",
 	"description": "Това разширение показва предупредителен екран, когато отваряте сайт от медийната група на Делян Пеевски. #ДАНСwithme",
-	"version": "0.6.3",
+	"version": "0.6.4",
 	"homepage_url": "http://ignorepeevski.tumblr.com/",
 	"icons": {
 		"16": "icon_16px.png",
