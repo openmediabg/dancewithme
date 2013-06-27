@@ -1,5 +1,5 @@
 function checkForPeevskiDomain(url) {
-	var currentDomains = [
+	var blockedDomains = [
 		'monitor.bg',
 		'telegraph.bg',
 		'politika.bg',
@@ -35,10 +35,10 @@ function checkForPeevskiDomain(url) {
 	];
 
 	var urlPattern;
-	for (var i = 0; i < currentDomains.length; i++) {
-		urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + currentDomains[i]);
+	for (var i = 0; i < blockedDomains.length; i++) {
+		urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
 		if (urlPattern.test(url)) {
-			return currentDomains[i];
+			return blockedDomains[i];
 		}
 	}
 
