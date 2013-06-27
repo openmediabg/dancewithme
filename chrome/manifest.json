@@ -24,6 +24,6 @@
 	],
 
 	"background": {
-		"scripts": [ "background.js" ]
+		"scripts": [ "background.js", "blocked_domains.js" ]
 	}
 }
