@@ -3,7 +3,7 @@
 old_pwd=`pwd`
 cd `dirname $0`
 
-cp -f ../common/blocked_domains.js .
+cp -f ../common/blocked_domains.js lib
 
 cd addon-sdk && . bin/activate
 cd .. && cfx xpi
