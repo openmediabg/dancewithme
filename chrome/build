@@ -1,0 +1,16 @@
+#!/bin/sh
+
+extension_files="manifest.json background.js blocked_domains.js init.js icon*png ignore.jpg warning.html"
+
+old_pwd=`pwd`
+cd `dirname $0`
+
+cp -f ../common/blocked_domains.js .
+
+rm -rf dancewithme && \
+	mkdir dancewithme && \
+	cp $extension_files dancewithme && \
+	zip -r dancewithme.zip dancewithme/ && \
+	rm -rf dancewithme
+
+cd "$old_pwd"
