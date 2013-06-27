@@ -2,6 +2,7 @@ var {data} = require("sdk/self");
 var {Class} = require('sdk/core/heritage');
 var {Unknown, Factory} = require('sdk/platform/xpcom');
 var {Cc, Ci} = require("chrome");
+var {checkForPeevskiDomain} = require('./blocked_domains');
 
 var contractId = '@ignorepeevski.tumblr.com/dancewithme';
 
@@ -11,12 +12,11 @@ var PeevskiPolicy = Class({
   get wrappedJSObject() this,
 
   shouldLoad: function(aContentType, aContentLocation, aRequestOrigin, aContext, aMimeTypeGuess, aExtra) {
-    result = Ci.nsIContentPolicy.ACCEPT;
+    var result = Ci.nsIContentPolicy.ACCEPT;
+    var isPeevskiDomain = checkForPeevskiDomain(aContentLocation.spec);
 
     // we should check for TYPE_SUBDOCUMENT as well if we want frames.
-    if ((Ci.nsIContentPolicy.TYPE_DOCUMENT == aContentType) &&
-      /.*monitor.bg.*/.test(aContentLocation.spec)) {
-
+    if ((Ci.nsIContentPolicy.TYPE_DOCUMENT == aContentType) && isPeevskiDomain) {
       aContext.loadURI(data.url('warning.html'), aRequestOrigin);
       result = Ci.nsIContentPolicy.REJECT_SERVER;
     }
