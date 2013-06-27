@@ -2,8 +2,13 @@
 
 extension_files="init.js manifest.json icon*png ignore.jpg background.js warning.html"
 
+old_pwd=`pwd`
+cd `dirname $0`
+
 rm -rf dancewithme && \
 	mkdir dancewithme && \
 	cp $extension_files dancewithme && \
 	zip -r dancewithme.zip dancewithme/ && \
 	rm -rf dancewithme
+
+cd "$old_pwd"
