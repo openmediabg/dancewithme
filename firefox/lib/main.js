@@ -2,6 +2,7 @@ var {data} = require("sdk/self");
 var {Class} = require('sdk/core/heritage');
 var {Unknown, Factory} = require('sdk/platform/xpcom');
 var {Cc, Ci} = require("chrome");
+var {PageMod} = require('sdk/page-mod');
 var {checkForPeevskiDomain} = require('./blocked_domains');
 
 var contractId = '@ignorepeevski.tumblr.com/dancewithme';
@@ -29,7 +30,10 @@ var factory = Factory({
   Component: PeevskiPolicy
 });
 
-categoryManager = Cc["@mozilla.org/categorymanager;1"]
-                      .getService(Ci.nsICategoryManager);
-
+categoryManager = Cc["@mozilla.org/categorymanager;1"].getService(Ci.nsICategoryManager);
 categoryManager.addCategoryEntry('content-policy', 'ignorepeevski', contractId, false, false);
+
+PageMod({
+  include: ['resource://*/dancewithme/data/warning.html'],
+  contentScript: data.url('init.js')
+});
