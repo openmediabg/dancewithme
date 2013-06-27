@@ -1,0 +1,13 @@
+#!/bin/sh
+
+old_pwd=`pwd`
+cd `dirname $0`
+
+cp -f ../common/blocked_domains.js .
+
+cd addon-sdk && . bin/activate
+cd .. && cfx xpi
+
+# Its an own shell, no need to deactivate.
+
+cd "$old_pwd"
