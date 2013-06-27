@@ -47,4 +47,8 @@ function checkForPeevskiDomain(url) {
 	}
 
 	return false;
-};
+}
+
+if (typeof exports !== 'undefined') {
+	exports.checkForPeevskiDomain = checkForPeevskiDomain;
+}
