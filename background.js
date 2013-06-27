@@ -35,7 +35,7 @@ function checkForPeevskiDomain(url) {
 	]
 	var urlPattern;
 	for (var i = 0; i < currentDomains.length; i++) {
-		urlPattern = new RegExp("^http(s)?\:\/\/([^\/]*)?" + currentDomains[i]);
+		urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + currentDomains[i]);
 		if (urlPattern.test(url)) {
 			return currentDomains[i];
 		}
