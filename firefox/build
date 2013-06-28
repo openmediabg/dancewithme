@@ -4,6 +4,8 @@ old_pwd=`pwd`
 cd `dirname $0`
 
 cp -f ../common/blocked_domains.js lib
+cp -f ../common/warning.* data
+cp -f ../common/ignore.jpg data
 
 cd addon-sdk && . bin/activate
 cd .. && cfx xpi

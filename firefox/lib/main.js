@@ -57,7 +57,7 @@ categoryManager.addCategoryEntry('content-policy', 'ignorepeevski', contractId, 
 
 PageMod({
   include: /resource:\/\/.*\/dancewithme\/data\/warning.html.*/,
-  contentScriptFile: data.url('init.js'),
+  contentScriptFile: data.url('warning.js'),
   onAttach: function(worker) {
     worker.port.on("allowCurrentUrl", function(urlIndex) {
       addDomainException(requestedUrls[urlIndex]);
