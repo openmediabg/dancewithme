@@ -6,7 +6,6 @@ var {PageMod} = require('sdk/page-mod');
 var {checkForPeevskiDomain} = require('./blocked_domains');
 
 exports.main = function() {
-  console.log("shite");
   var domainExceptions = {};
 
   /*
