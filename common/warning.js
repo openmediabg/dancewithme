@@ -8,7 +8,7 @@
 	}
 
 	document.getElementById('current_url').innerText = getCurrentUrl();
-	document.getElementById('go_back').onclick = history.back;
+	document.getElementById('go_back').onclick = function() {history.back()};
 
 	if (firefox) {
 		self.port.on("redirectTo", function(url) {
