@@ -1,3 +1,4 @@
 #!/bin/sh
 
 `dirname $0`/chrome/build
+`dirname $0`/firefox/build
