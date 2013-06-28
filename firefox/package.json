@@ -1,9 +1,13 @@
 {
   "name": "dancewithme",
-  "fullName": "dancewithme",
+  "fullName": "#ДАНСwithme",
+  "author": "#ignorepeevski (http://ignorepeevski.tumblr.com/)",
   "id": "jid1-Bl0yKy6JyNRe4Q",
-  "description": "",
-  "author": "",
+  "description": "Това разширение показва предупредителен екран, когато отваряте сайт от медийната група на Делян Пеевски. #ДАНСwithme",
+  "contributors": "https://github.com/open-media/dancewithme/graphs/contributors",
+  "homepage": "http://ignorepeevski.tumblr.com",
+  "icon": "icon.png",
+  "icon64": "icon.png",
   "license": "MPL 2.0",
-  "version": "0.1"
+  "version": "0.1.0"
 }
