@@ -42,11 +42,48 @@ function checkForPeevskiDomain(url) {
 	for (var i = 0; i < blockedDomains.length; i++) {
 		urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
 		if (urlPattern.test(url)) {
-			return blockedDomains[i];
+			return {
+                'reason': 'domain',
+                'domain': blockedDomains[i]
+            };
 		}
 	}
 
-	return false;
+    var fbPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
+    if (fbPattern.test(url)) {
+        var fbPath = url.replace(fbPattern, '');
+        return checkFacebookPage(fbPath);
+    }
+
+    return false;
+}
+
+function checkFacebookPage(fbPath) {
+    var blockedFacebookPages = [
+        "gafove",
+        "pages/Мразя-лъжите-/157946291399",
+        "bulgaria.nai.krasiva",
+        "pages/Бъдеще-за-нас-на-инат/494175647296443",
+        "lovefootball.eu",
+        "purva.bundesliga",
+        "jivei.kakto.mojesh",
+        "obicham.sporta",
+        "galena.payner",
+        "bgjokes"
+    ];
+
+
+    var pathPattern;
+    var pattern_base = "^http(s)?\\:\\/\\/(\w)*.facebook.com\\/"
+    for (var i = i; i < blockedFacebookPages.length; ++i) {
+        pathPattern = new RegExp(pattern_base + "(" + blockedFacebookPages[i] + ")");
+        if (pathPattern.test(fbPath) {
+            return {
+                'reason': 'fbPage',
+                'page': blockedFacebookPages[i]
+            };
+        }
+    }
 }
 
 if (typeof exports !== 'undefined') {
