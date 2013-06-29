@@ -14,7 +14,7 @@
 
   if (firefox) {
     self.port.on("redirectTo", function(url) {
-      window.location.href = url;
+      location.href = url;
     });
 
     document.getElementById('force_continue').onclick = function() {

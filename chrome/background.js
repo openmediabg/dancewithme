@@ -33,6 +33,7 @@ chrome.runtime.onMessage.addListener(
       var date   = new Date();
       var time   = date.getTime();
       domainExceptions[blocking.domain] = time + 10 * 60 * 1000;
+
       chrome.tabs.getSelected(null, function (tab) {
         chrome.tabs.update(tab.id, {url: url});
       });
