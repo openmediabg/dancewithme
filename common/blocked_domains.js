@@ -51,7 +51,7 @@ function checkForPeevskiDomain(url) {
 
     var fbPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
     if (fbPattern.test(url)) {
-        var fbPath = url.replace(fbPattern, '');
+        var fbPath = decodeURIComponent(url.replace(fbPattern, ''));
         return checkFacebookPage(fbPath);
     }
 
