@@ -3,10 +3,10 @@ var domainExceptions = {};
 chrome.webRequest.onBeforeRequest.addListener(
 	function(info) {
 		var blocking = checkForPeevskiDomain(info.url);
-		if (blocking !== false) {
+		if (blocking !== false && blocking.reason == 'domain') {
 			var date = new Date();
 			var time = date.getTime();
-			if (domainExceptions[blocking['domain']] === undefined || time > domainExceptions[blocking['domain']]) {
+			if (domainExceptions[blocking.domain] === undefined || time > domainExceptions[blocking.domain]) {
 				return {redirectUrl: chrome.extension.getURL('warning.html') + '?' + encodeURIComponent(info.url)};
 			}
 		}

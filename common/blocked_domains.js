@@ -75,15 +75,15 @@ function checkFacebookPage(fbPath) {
 
     var pathPattern;
     var pattern_base = "^http(s)?\\:\\/\\/(\w)*.facebook.com\\/"
-    for (var i = i; i < blockedFacebookPages.length; ++i) {
-        pathPattern = new RegExp(pattern_base + "(" + blockedFacebookPages[i] + ")");
-        if (pathPattern.test(fbPath) {
-            return {
-                'reason': 'fbPage',
-                'page': blockedFacebookPages[i]
-            };
-        }
+    var index = blockedFacebookPages.indexOf(fbPath.replace(/\?.+/, ''));
+    if (index != -1) {
+        return {
+            'reason': 'fbPage',
+            'page': blockedFacebookPages[index]
+        };
     }
+
+    return false;
 }
 
 if (typeof exports !== 'undefined') {
