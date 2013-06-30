@@ -7,7 +7,7 @@ chrome.webRequest.onBeforeRequest.addListener(
       var date = new Date();
       var time = date.getTime();
                         var warning_page = blocking.reason == 'domain' ? 'warning.html' : 'warning_fb.html';
-      if (domainExceptions[blocking.domain] === undefined || time > domainExceptions[blocking.domain]) {
+      if (domainExceptions[blocking.url] === undefined || time > domainExceptions[blocking.url]) {
         return {redirectUrl: chrome.extension.getURL(warning_page) + '?' + encodeURIComponent(info.url)};
       }
     }
@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener(
       var blocking = checkForPeevskiDomain(url);
       var date   = new Date();
       var time   = date.getTime();
-      domainExceptions[blocking.domain] = time + 10 * 60 * 1000;
+      domainExceptions[blocking.url] = time + 10 * 60 * 1000;
 
       chrome.tabs.getSelected(null, function (tab) {
         chrome.tabs.update(tab.id, {url: url});

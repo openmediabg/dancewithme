@@ -44,7 +44,7 @@ function checkForPeevskiDomain(url) {
     if (urlPattern.test(url)) {
       return {
         'reason': 'domain',
-        'domain': blockedDomains[i]
+        'url': blockedDomains[i]
       };
     }
   }
@@ -104,7 +104,7 @@ function checkFacebookPage(fbPath) {
   if (index != -1) {
     return {
       'reason': 'fbPage',
-      'page': blockedFacebookPages[index]
+      'url': blockedFacebookPages[index]
     };
   }
 
