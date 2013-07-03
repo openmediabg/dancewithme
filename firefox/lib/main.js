@@ -4,15 +4,10 @@ var {Unknown, Factory} = require('sdk/platform/xpcom');
 var {Cc, Ci} = require("chrome");
 var {PageMod} = require('sdk/page-mod');
 var {checkForPeevskiDomain} = require('./blocked_domains');
+var base64url = require('./base64url');
 
 exports.main = function() {
   var domainExceptions = {};
-
-  /*
-   * Firefox does not like the : symbol in resource:// urls so we work
-   * around this by keeping the urls in an array and passing around their keys.
-   */
-  var requestedUrls = [];
 
   var addDomainException = function(url) {
     var domain = checkForPeevskiDomain(url);
@@ -38,9 +33,7 @@ exports.main = function() {
       var peevskiDomain = checkForPeevskiDomain(url);
 
       if ((Ci.nsIContentPolicy.TYPE_DOCUMENT == aContentType) && peevskiDomain && !checkForDomainException(peevskiDomain)) {
-        var urlIndex = requestedUrls.push(url) - 1;
-        var redirectUrl = data.url("warning.html?" + urlIndex);
-
+        let redirectUrl = data.url("warning.html") + "?" + base64url.urlSafeEncode(url);
         aContext.loadURI(redirectUrl, aRequestOrigin);
         result = Ci.nsIContentPolicy.REJECT_SERVER;
       }
@@ -57,12 +50,13 @@ exports.main = function() {
   categoryManager.addCategoryEntry('content-policy', 'ignorepeevski', contractId, false, false);
 
   PageMod({
-    include: /resource:\/\/.*\/dancewithme\/data\/warning.html.*/,
+    include: /resource:\/\/.*\/dancewithme\/data\/warning\.html.*/,
     contentScriptFile: data.url('warning.js'),
     onAttach: function(worker) {
-      worker.port.on("allowCurrentUrl", function(urlIndex) {
-        addDomainException(requestedUrls[urlIndex]);
-        worker.port.emit("redirectTo", requestedUrls[urlIndex]);
+      worker.port.on("allowCurrentUrl", function(encodedURL) {
+        var url = base64url.urlSafeDecode(encodedURL);
+        addDomainException(url);
+        worker.port.emit("redirectTo", url);
       });
     }
   });
