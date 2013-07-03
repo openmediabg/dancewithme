@@ -51,7 +51,8 @@ exports.main = function() {
 
   PageMod({
     include: /resource:\/\/.*\/dancewithme\/data\/warning\.html.*/,
-    contentScriptFile: data.url('warning.js'),
+    contentScriptFile: [data.url('base64decode.js'),
+                        data.url('warning.js')],
     onAttach: function(worker) {
       worker.port.on("allowCurrentUrl", function(encodedURL) {
         var url = base64url.urlSafeDecode(encodedURL);

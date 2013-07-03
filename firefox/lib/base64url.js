@@ -1,13 +1,13 @@
 var base64 = require("sdk/base64");
 
-urlSafeEncode = function(string, encoding) {
+var urlSafeEncode = function(string, encoding) {
   return base64.encode(string, encoding)
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=+$/, '');
 };
 
-urlSafeDecode = function(string, encoding) {
+var urlSafeDecode = function(string, encoding) {
   // Add padding
   while (string.length % 4)
     string += '=';
