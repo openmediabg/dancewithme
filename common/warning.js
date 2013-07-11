@@ -2,6 +2,7 @@
   'use strict';
 
   var firefox = typeof self !== 'undefined' && self.port;
+  var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
   function getCurrentUrl() {
     return decodeURIComponent(location.href.toString().split('?')[1]);
@@ -23,7 +24,11 @@
   } else {
     document.getElementById('current_url').innerText = getCurrentUrl();
     document.getElementById('force_continue').onclick = function() {
-      chrome.runtime.sendMessage({allowCurrentUrl: getCurrentUrl()});
+      if (isSafari) {
+        safari.self.tab.dispatchMessage('allowCurrentUrl', getCurrentUrl());
+      } else {
+        chrome.runtime.sendMessage({allowCurrentUrl: getCurrentUrl()});
+      }
     };
   }
 }).call(this);
