@@ -42,8 +42,70 @@ function checkForPeevskiDomain(url) {
   for (var i = 0; i < blockedDomains.length; i++) {
     urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
     if (urlPattern.test(url)) {
-      return blockedDomains[i];
+      return {
+        'reason': 'domain',
+        'url': blockedDomains[i]
+      };
     }
+  }
+
+  var fbPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
+  if (fbPattern.test(url)) {
+    var fbPath = decodeURIComponent(url.replace(fbPattern, ''));
+    return checkFacebookPage(fbPath);
+  }
+
+  return false;
+}
+
+function checkFacebookPage(fbPath) {
+  var blockedFacebookPages = [
+    "telegraphbg",
+    "europost.eu",
+    "TV7Bulgaria",
+    "econ.bg",
+    "iNews.bg",
+    "www.jenite.bg",
+    "Div.bg",
+    "www.sporta.bg",
+    "FitWell.bg",
+    "Peika.bg",
+    "kulinar.bg",
+    "Sever.bg",
+    "get.bg",
+    "bnews.bg",
+    "bsport.bg",
+    "bsportnews",
+    "bnews.bg",
+    "BMediaGroup",
+    "BLife.bg",
+    "bmglife.blifebg",
+    "bmobile.bg",
+    "blitz.bg",
+    "blitz.bgshow",
+    "Blitz.bgSport",
+    "blitzhealth",
+    "blitzladies",
+    "nad55",
+    "standartnews",
+    "pages/Strumabg/381955041882220",
+    "marica.bg",
+    "Vsekiden",
+    "novinar.bg",
+    "radiovitosha",
+    "pages/Радио-Веселина/366784846671021",
+    "radioveselina"
+  ];
+
+
+  var pathPattern;
+  var pattern_base = "^http(s)?\\:\\/\\/(\w)*.facebook.com\\/"
+  var index = blockedFacebookPages.indexOf(fbPath.replace(/\?.+/, ''));
+  if (index != -1) {
+    return {
+      'reason': 'fbPage',
+      'url': blockedFacebookPages[index]
+    };
   }
 
   return false;
