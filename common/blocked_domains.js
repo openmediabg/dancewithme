@@ -16,7 +16,7 @@ function checkForPeevskiDomain(url) {
     'div.bg',
     'sporta.bg',
     'fitwell.bg',
-    'sportuvaj.bg',
+    'sportuvai.bg',
     'peika.bg',
     'kulinar.bg',
     'sever.bg',
