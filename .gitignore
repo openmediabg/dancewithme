@@ -1,3 +1,12 @@
 .DS_Store
 dancewithme.zip
 chrome/blocked_domains.js
+chrome/ignore.jpg
+chrome/warning.html
+chrome/warning.js
+chrome/warning_fb.html
+firefox/dancewithme.xpi
+firefox/data/ignore.jpg
+firefox/data/warning.html
+firefox/data/warning.js
+firefox/lib/blocked_domains.js
