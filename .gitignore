@@ -9,4 +9,5 @@ firefox/dancewithme.xpi
 firefox/data/ignore.jpg
 firefox/data/warning.html
 firefox/data/warning.js
+firefox/data/warning_fb.html
 firefox/lib/blocked_domains.js
