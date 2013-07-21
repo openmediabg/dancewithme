@@ -38,27 +38,17 @@ function checkForPeevskiDomain(url) {
     'thevoice.bg'
   ];
 
-  var urlPattern;
   for (var i = 0; i < blockedDomains.length; i++) {
-    urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
+    var urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
     if (urlPattern.test(url)) {
-      return {
-        'reason': 'domain',
-        'url': blockedDomains[i]
-      };
+      return {reason: 'domain', url: blockedDomains[i]};
     }
   }
 
-  var fbPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
-  if (fbPattern.test(url)) {
-    var fbPath = decodeURIComponent(url.replace(fbPattern, ''));
-    return checkFacebookPage(fbPath);
-  }
-
-  return false;
+  return checkFacebookPage(url);
 }
 
-function checkFacebookPage(fbPath) {
+function checkFacebookPage(path) {
   var blockedFacebookPages = [
     "telegraphbg",
     "europost.eu",
@@ -97,18 +87,16 @@ function checkFacebookPage(fbPath) {
     "radioveselina"
   ];
 
+  var facebookPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
+  if (!facebookPattern.test(path)) return;
 
-  var pathPattern;
-  var pattern_base = "^http(s)?\\:\\/\\/(\w)*.facebook.com\\/"
-  var index = blockedFacebookPages.indexOf(fbPath.replace(/\?.+/, ''));
-  if (index != -1) {
-    return {
-      'reason': 'fbPage',
-      'url': blockedFacebookPages[index]
-    };
+  path = path
+    .replace(facebookPattern, '')
+    .replace(/\?.+/, '');
+
+  if (blockedFacebookPages.indexOf(path) != -1) {
+    return {reason: 'fbPage', url: path};
   }
-
-  return false;
 }
 
 if (typeof exports !== 'undefined') {
