@@ -2,3 +2,4 @@
 
 `dirname $0`/chrome/build
 `dirname $0`/firefox/build
+`dirname $0`/safari/build

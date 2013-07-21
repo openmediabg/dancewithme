@@ -1,0 +1,20 @@
+#!/bin/sh
+
+old_pwd=`pwd`
+cd `dirname $0`
+
+extension_files="global.html Icon.png Info.plist"
+
+mkdir dancewithme.safariextension && \
+  cp -f ../common/* dancewithme.safariextension && \
+  cp $extension_files dancewithme.safariextension
+
+./xar -czf dancewithme.safariextz --distribution dancewithme.safariextension
+./xar --sign -f dancewithme.safariextz --digestinfo-to-sign digest.dat --sig-size `cat size.txt` --cert-loc cert.der --cert-loc cert01 --cert-loc cert02
+openssl rsautl -sign -inkey key.pem -in digest.dat -out sig.dat
+./xar --inject-sig sig.dat -f dancewithme.safariextz
+
+rm -f sig.dat digest.dat
+rm -rf dancewithme.safariextension
+
+cd "$old_pwd"
