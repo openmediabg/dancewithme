@@ -39,7 +39,7 @@ function checkForPeevskiDomain(url) {
   ];
 
   for (var i = 0; i < blockedDomains.length; i++) {
-    var urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
+    var urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i].replace(".", "\\."));
     if (urlPattern.test(url)) {
       return {reason: 'domain', url: blockedDomains[i]};
     }
