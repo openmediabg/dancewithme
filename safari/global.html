@@ -12,8 +12,10 @@ function beforeNavigateHandler(event) {
   if (domain !== false) {
     var date = new Date();
     var time = date.getTime();
+    var warningPage = blocking.reason === 'domain' ? 'warning.html' : 'warning_fb.html';
+
     if (domainExceptions[domain] === undefined || time > domainExceptions[domain]) {
-      event.target.url = safari.extension.baseURI + 'warning.html'  + '?' + encodeURIComponent(event.url);
+      event.target.url = safari.extension.baseURI + warningPage  + '?' + encodeURIComponent(event.url);
     }
   }
 }
