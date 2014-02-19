@@ -25,7 +25,7 @@
 		<dict/>
 	</dict>
 	<key>Description</key>
-	<string>Показва предупредителен екран, когато отваряте сайт от медийната група на Делян Пеевски. #ДАНСwithme</string>
+	<string>Показва предупредителен екран, когато отваряте страница от медийната група на Делян Пеевски. #ДАНСwithme</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>

@@ -7,26 +7,28 @@ safari.application.addEventListener("beforeNavigate", beforeNavigateHandler, tru
 safari.application.addEventListener("message", waitForMessage, false);
 
 function beforeNavigateHandler(event) {
-  var domain = checkForPeevskiDomain(event.url);
+  var blocking = checkForPeevskiDomain(event.url);
 
-  if (domain !== false) {
+  if (blocking) {
     var date = new Date();
     var time = date.getTime();
     var warningPage = blocking.reason === 'domain' ? 'warning.html' : 'warning_fb.html';
-
-    if (domainExceptions[domain] === undefined || time > domainExceptions[domain]) {
+    
+    if (domainExceptions[blocking.url] === undefined || time > domainExceptions[blocking.url]) {
+      event.preventDefault();
       event.target.url = safari.extension.baseURI + warningPage  + '?' + encodeURIComponent(event.url);
     }
   }
+  return null;
 }
 
 function waitForMessage(event) {
   if (event.name == 'allowCurrentUrl') {
     var url    = event.message;
-    var domain = checkForPeevskiDomain(url);
+    var blocking = checkForPeevskiDomain(url);
     var date   = new Date();
     var time   = date.getTime();
-    domainExceptions[domain] = time + 10 * 60 * 1000;
+    domainExceptions[blocking.url] = time + 10 * 60 * 1000;
     safari.application.activeBrowserWindow.activeTab.url = url;  
   }
 }
