@@ -13,7 +13,7 @@
   };
 
   if (firefox) {
-    document.getElementById('current_url').innerHTML = urlSafeDecode(getCurrentUrl());
+    document.getElementById('current_url').textContent = urlSafeDecode(getCurrentUrl());
     self.port.on("redirectTo", function(url) {
       location.href = url;
     });

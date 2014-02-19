@@ -38,15 +38,65 @@ function checkForPeevskiDomain(url) {
     'thevoice.bg'
   ];
 
-  var urlPattern;
   for (var i = 0; i < blockedDomains.length; i++) {
-    urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i]);
+    var urlPattern = new RegExp("^http(s)?\\:\\/\\/([^\\/]+\\.)?" + blockedDomains[i].replace(".", "\\."));
     if (urlPattern.test(url)) {
-      return blockedDomains[i];
+      return {reason: 'domain', url: blockedDomains[i]};
     }
   }
 
-  return false;
+  return checkFacebookPage(url);
+}
+
+function checkFacebookPage(path) {
+  var blockedFacebookPages = [
+    "telegraphbg",
+    "europost.eu",
+    "TV7Bulgaria",
+    "econ.bg",
+    "iNews.bg",
+    "www.jenite.bg",
+    "Div.bg",
+    "www.sporta.bg",
+    "FitWell.bg",
+    "Peika.bg",
+    "kulinar.bg",
+    "Sever.bg",
+    "get.bg",
+    "bnews.bg",
+    "bsport.bg",
+    "bsportnews",
+    "bnews.bg",
+    "BMediaGroup",
+    "BLife.bg",
+    "bmglife.blifebg",
+    "bmobile.bg",
+    "blitz.bg",
+    "blitz.bgshow",
+    "Blitz.bgSport",
+    "blitzhealth",
+    "blitzladies",
+    "nad55",
+    "standartnews",
+    "pages/Strumabg/381955041882220",
+    "marica.bg",
+    "Vsekiden",
+    "novinar.bg",
+    "radiovitosha",
+    "pages/Радио-Веселина/366784846671021",
+    "radioveselina"
+  ];
+
+  var facebookPattern = /^http(s)?\:\/\/(\w)*\.facebook.com\//;
+  if (!facebookPattern.test(path)) return;
+
+  path = path
+    .replace(facebookPattern, '')
+    .replace(/\?.+/, '');
+
+  if (blockedFacebookPages.indexOf(path) != -1) {
+    return {reason: 'fbPage', url: path};
+  }
 }
 
 if (typeof exports !== 'undefined') {
