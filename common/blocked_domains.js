@@ -35,7 +35,10 @@ function checkForPeevskiDomain(url) {
     'radiovitosha.com',
     'radioveselina.bg',
     'magicfm.bg',
-    'thevoice.bg'
+    'thevoice.bg',
+    'novinite.com',
+    'novinite.bg',
+    'novinite.ru'
   ];
 
   for (var i = 0; i < blockedDomains.length; i++) {
