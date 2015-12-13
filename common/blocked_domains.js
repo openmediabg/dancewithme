@@ -1,5 +1,6 @@
 function checkForPeevskiDomain(url) {
   var blockedDomains = [
+    'pik.bg',
     'monitor.bg',
     'telegraph.bg',
     'politika.bg',
